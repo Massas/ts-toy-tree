@@ -1,0 +1,26 @@
+{
+  "name": "ts-toy-tree",
+  "version": "1.0.0",
+  "description": "This is practice according to WEB+DB PRESS Vol.117 ç‰¹é›?1ã€Œå®Ÿæˆ¦æŠ•å?¥TypeScriptã€?",
+  "main": "index.js",
+  "bin": {
+    "toy-tree": "src/bin.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Massas/ts-toy-tree.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Massas/ts-toy-tree/issues"
+  },
+  "homepage": "https://github.com/Massas/ts-toy-tree#readme",
+  "dependencies": {
+    "meow": "^8.0.0"
+  }
+}
