@@ -1,13 +1,13 @@
 {
   "name": "ts-toy-tree",
   "version": "1.0.0",
-  "description": "This is practice according to WEB+DB PRESS Vol.117 ç‰¹ï¿½?1ã€Œå®Ÿæˆ¦æŠ•ï¿½?ï¿½TypeScriptï¿½?",
+  "description": "This is practice according to WEB+DB PRESS Vol.117 ç‰¹?¿½?1ã€Œå®Ÿæˆ¦æŠ•ï¿½??¿½TypeScript?¿½?",
   "main": "index.js",
   "bin": {
     "toy-tree": "src/bin.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,11 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "meow": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "jest": {
+    "setupFiles": ["./jest.setup.js"]
   }
 }
