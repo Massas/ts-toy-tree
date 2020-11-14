@@ -1,7 +1,7 @@
 {
   "name": "ts-toy-tree",
   "version": "1.0.0",
-  "description": "This is practice according to WEB+DB PRESS Vol.117 特�?1「実戦投�?�TypeScript�?",
+  "description": "This is practice according to WEB+DB PRESS Vol.117 特�?1「実戦投�?�TypeScript�?",
   "main": "index.js",
   "bin": {
     "toy-tree": "src/bin.js"
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Massas/ts-toy-tree#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "meow": "^8.0.0"
   }
 }
