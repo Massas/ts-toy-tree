@@ -102,7 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# jest Test suite output
-__snapshots__
-*.snap

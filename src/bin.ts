@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-//const { main } = require('./');
 import { main } from './';
 
 const code = main(
