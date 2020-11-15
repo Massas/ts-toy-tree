@@ -19,10 +19,18 @@ const readDirectory = (dir: string, depth: number, options: Options) => {
             nodes.push({type: 'file', name: dirent.name,});
         }
         else if(dirent.isDirectory()){
-            nodes.push({type: 'directory',
-                        name: dirent.name,
-                        children: readDirectory(path.join(dir, dirent.name), depth + 1, options,),}
-            );
+            nodes.push({
+                type: 'directory',
+                name: dirent.name,
+                children: readDirectory(path.join(dir, dirent.name), depth + 1, options,),
+            });
+        }
+        else if(dirent.isSymbolicLink()){
+            nodes.push({
+                type: 'symlink',
+                name: dirent.name,
+                link: fs.readlinkSync(path.join(dir, dirent.name),),
+            });
         }
     });
     return nodes;

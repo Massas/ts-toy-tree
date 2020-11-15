@@ -13,11 +13,16 @@ export interface FileNode extends BaseNode<'file'>{}
 export interface DirectoryNode extends BaseNode<'directory'>{
     children: TreeNode[];
 }
+// シンボリックリンク用のノード定義
+export interface SymlinkNode extends BaseNode<'symlink'>{
+    link: string;
+}
 
 // toy-treeで扱う全ノードのいずれかの型を表すunion型
-export type TreeNode = FileNode | DirectoryNode;
+export type TreeNode = FileNode | DirectoryNode | SymlinkNode;
 
 // options
 export interface Options{
     level: number;
 }
+
