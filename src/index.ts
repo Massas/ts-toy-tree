@@ -1,52 +1,51 @@
-import meow from 'meow';
-import { read } from './read';
-import { format } from './format';
-import { DirectoryNode, Options } from './types';
+import meow from "meow";
+import { read } from "./read";
+import { format } from "./format";
+import { DirectoryNode, Options } from "./types";
 
-// Œ^’Žß
 type Writer = (...args: any[]) => void;
 
 export const main = (argv: string[], stdout: Writer, stderr: Writer) => {
-    const cli = meow(
-        `
+  const cli = meow(
+    `
         Usage
             $ toy-tree <directory>
         Examples
             $ tooy-tree
             $ tooy-tree path/to/dir
         `,
-        {
-            flags: {
-                level: {
-                    type: 'number',
-                    alias: 'L',
-                    default: Infinity,
-                },
-            },
-            argv,
+    {
+      flags: {
+        level: {
+          type: "number",
+          alias: "L",
+          default: Infinity,
         },
-    );
-
-    const dir = cli.input[0] || '.';
-
-    const options: Options = { level: cli.flags.level };
-
-    if(options.level < 1){
-        stderr('Error: Invalid level, must be greater than 0.');
-        return 1;
+      },
+      argv,
     }
+  );
 
-    let root: DirectoryNode;
+  const dir = cli.input[0] || ".";
 
-    try{
-        root = read(dir, options);
-    } catch(e){
-        stderr(`Error: ${e.message}`);
-        return 1;
-    }
-    const output = format(root);
+  const options: Options = { level: cli.flags.level };
 
-    stdout(output);
+  if (options.level < 1) {
+    stderr("Error: Invalid level, must be greater than 0.");
+    return 1;
+  }
 
-    return 0;
-}
+  let root: DirectoryNode;
+
+  try {
+    root = read(dir, options);
+  } catch (e) {
+    stderr(`Error: ${e.message}`);
+    return 1;
+  }
+  const output = format(root);
+
+  stdout(output);
+
+  return 0;
+};

@@ -1,52 +1,56 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 //const fs = require('console');
 
 const readDirectory = (dir, depth, options) => {
-    // -LƒIƒvƒVƒ‡ƒ“‚Ì’l‚ÆŒ»İ‚ÌŠK‘w‚ğ”äŠr‚µ‚ÄA“Ç‚İæ‚è•s—v‚É‚È‚Á‚½ƒ^ƒCƒ~ƒ“ƒO‚ÅÄ‹A‚ğ’†~‚·‚é
-    if(options.level < depth){
-        return [];
+  // -Lï¿½Iï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ì’lï¿½ÆŒï¿½ï¿½İ‚ÌŠKï¿½wï¿½ï¿½ï¿½rï¿½ï¿½ï¿½ÄAï¿½Ç‚İï¿½ï¿½sï¿½vï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½ÅÄ‹Aï¿½ğ’†~ï¿½ï¿½ï¿½ï¿½
+  if (options.level < depth) {
+    return [];
+  }
+
+  const dirents = fs.readdirSync(dir, { withFileTypes: true });
+  const nodes = [];
+  dirents.forEach((dirent) => {
+    if (dirent.name.startsWith(".")) {
+      return;
     }
 
-    const dirents = fs.readdirSync(dir, {withFileTypes: true});
-    const nodes = [];
-    dirents.forEach((dirent) => {
-        if(dirent.name.startsWith('.')){
-            return;
-        }
-
-        if(dirent.isFile()){
-            nodes.push({type: 'file', name: dirent.name,});
-        }
-        else if(dirent.isDirectory()){
-            nodes.push({type: 'directory',
-                        name: dirent.name,
-                        children: readDirectory(path.join(dir, dirent.name), depth + 1, options,),}
-            );
-        }
-    });
-    return nodes;
-}
+    if (dirent.isFile()) {
+      nodes.push({ type: "file", name: dirent.name });
+    } else if (dirent.isDirectory()) {
+      nodes.push({
+        type: "directory",
+        name: dirent.name,
+        children: readDirectory(
+          path.join(dir, dirent.name),
+          depth + 1,
+          options
+        ),
+      });
+    }
+  });
+  return nodes;
+};
 
 exports.read = (dir, options) => {
-    let stat;
+  let stat;
 
-    try {
-        stat = fs.statSync(dir);
-    } catch (e) {
-        throw new Error(`"${dir}" does not exist.`);
-    }
+  try {
+    stat = fs.statSync(dir);
+  } catch (e) {
+    throw new Error(`"${dir}" does not exist.`);
+  }
 
-    if(!stat.isDirectory()){
-        throw new Error(`"${dir}" cannot be opened as a directory.`);
-    }
+  if (!stat.isDirectory()) {
+    throw new Error(`"${dir}" cannot be opened as a directory.`);
+  }
 
-    // readDirectoryŠÖ”‚É‰ŠúŠK‘w‚Æoptions‚ğ“n‚·
-    const root = {
-        type: 'directory',
-        name: dir,
-        children: readDirectory(dir, 1, options),
-    };
+  // readDirectoryï¿½Öï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½Kï¿½wï¿½ï¿½optionsï¿½ï¿½nï¿½ï¿½
+  const root = {
+    type: "directory",
+    name: dir,
+    children: readDirectory(dir, 1, options),
+  };
 
-    return root;
-}
+  return root;
+};
